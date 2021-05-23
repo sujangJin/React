@@ -1,4 +1,4 @@
-import React, { setTools, useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
@@ -33,8 +33,26 @@ const App = () => {
         text,
         checked: false,
       };
-      setTools(todos.concat(todo));
+      setTodos(todos.concat(todo));
       nextId.current += 1; // nextId 1씩 더하기
+    },
+    [todos],
+  );
+
+  const onRemove = useCallback(
+    id => {
+      setTodos(todos.filter(todo => todo.id !== id));
+    },
+    [todos],
+  );
+
+  const onToggle = useCallback(
+    id => {
+      setTodos(
+        todos.map(todo =>
+          todo.id === id ? { ...todo, checked: !todo.checked} : todo,
+          ),
+      );
     },
     [todos],
   );
@@ -42,7 +60,7 @@ const App = () => {
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />
-      <TodoList todos={todos}/>
+      <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle}/>
     </TodoTemplate>
   );
 };
