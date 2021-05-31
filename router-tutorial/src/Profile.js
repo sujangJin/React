@@ -5,10 +5,7 @@ const data = {
         name: '김민준',
         description: '리액트를 좋아하는 개발자'
     },
-    jinsj1: {
-        name: '진수장',
-        description: '리액트 실습하는 자'
-    }
+    
 };
 
 const Profile = ({ match }) => {
