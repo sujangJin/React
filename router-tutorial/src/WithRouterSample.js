@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-const WithRouterSample = ({ location, math, history }) => {
+const WithRouterSample = ({ location, match, history }) => {
     return (
         <div>
             <h4>location</h4>
