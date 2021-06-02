@@ -21,6 +21,10 @@ const Profiles = () => {
                 exect 
                 render={() => <div>사용자를 선택해 주세요.</div>}
             />
+            <Route
+                path="profiles/:username"
+                component = {Profile}
+            />
             <WithRouterSample />
         </div>
     );
