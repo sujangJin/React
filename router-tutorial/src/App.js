@@ -30,7 +30,6 @@ const App = () => {
         <Route path="/history" component={HistorySample} />
         <Route
         // path를 따로 정의하지 않으면 모든 상황에 렌더링됨
-        // 이렇게 할 경우 profiles/:username 이 location 에서 제외되는데.. 해결방법은?..
         render={({ location }) => (
             <div>
               <h2>이 페이지는 존재하지 않습니다.</h2>
