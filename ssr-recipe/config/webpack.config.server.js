@@ -1,4 +1,4 @@
-const paths = require('./pahts');
+const paths = require('./paths');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent'); 
 const nodeExternals = require('webpack-node-externals');
 // CSS Module의 고유 className 을 만들 때 옵션
