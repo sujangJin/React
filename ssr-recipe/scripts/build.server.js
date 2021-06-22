@@ -16,11 +16,13 @@ function build() {
     fs.emptyDirSync(paths.ssrBuild);
     let compiler = webpack(config);
     return new Promise((resolve, reject) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        console.log(stats.toString());
+        compiler.run((err, stats) => {
+            if(err){
+                console.log(err);
+                return;
+            }
+            console.log(stats.toString());
+        })
     })
 }
 
