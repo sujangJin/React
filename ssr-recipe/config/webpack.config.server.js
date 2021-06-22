@@ -10,8 +10,7 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-const publicUrl = paths.servedPath.slice(0, -1);
-const env = getClientEnvironment(publicUrl);
+const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
 module.exports = {
     mode: 'production', // 프로덕션 모드로 설정하여 최적화 옵션들을 활성화
@@ -21,7 +20,7 @@ module.exports = {
         path: paths.ssrBuild, // 빌드 경로
         filename: 'server.js', // 파일 이름
         chunkFilename: 'js/[name].chunk.js', // 청크 파일 이름
-        publicPath: paths.servedPath, // 정적 파일이 제공될 경로
+        publicPath: paths.publicUrlOrPath, // 정적 파일이 제공될 경로
     },
     module: {
         rules: [
@@ -58,10 +57,10 @@ module.exports = {
                 {
                     test: cssRegex,
                     exclude: cssModuleRegex,
-                    // exportOnlyLocals: true 옵션을 설정해야 실제 CSS 파일을 생성하지 않습니다.
+                    // onlyLocals: true 옵션을 설정해야 실제 CSS 파일을 생성하지 않습니다.
                     loader: require.resolve('css-loader'),
                     options: {
-                        exportOnlyLocals: true
+                        onlyLocals: true
                     }
                 },
                 // CSS Module을 위한 처리
@@ -70,7 +69,7 @@ module.exports = {
                     loader: require.resolve('css-loader'),
                     options: {
                         modules: true,
-                        exportOnlyLocals: true,
+                        onlyLocals: true,
                         getLocalIdent: getCSSModuleLocalIdent
                     }
                 },
@@ -82,7 +81,7 @@ module.exports = {
                         {
                             loader: require.resolve('css-loader'),
                             options: {
-                                exportOnlyLocals: true
+                                onlyLocals: true
                             }
                         },
                         require.resolve('sass-loader')
@@ -97,7 +96,7 @@ module.exports = {
                             loader: require.resolve('css-loader'),
                             options: {
                                 modules: true,
-                                exportOnlyLocals: true,
+                                onlyLocals: true,
                                 getLocalIdent: getCSSModuleLocalIdent
                             }
                         },
@@ -107,7 +106,7 @@ module.exports = {
                 // url-loader를 위한 설정
                 {
                     test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-                    loader: require.resolve(url-loader),
+                    loader: require.resolve('url-loader'),
                     options: {
                         emitFile: false, // 파일을 따로 저장하지 않는 옵션
                         limit: 10000, // 원래는 9.7KB가 넘어가면 파일로 저장하는데
