@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import express from 'express';
 import { StaticRouter } from 'react-router-dom';
 import App from './App';
+import path from 'path';
 
 const app = express();
 
