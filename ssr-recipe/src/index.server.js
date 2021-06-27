@@ -25,6 +25,7 @@ const serve = express.static(path.resolve('./build'), {
     index : false // "/" 경로에서 index.html을 보여 주지 않도록 설정
 })
 
+app.use(serve);
 app.use(serverRender);
 
 // 5000 포트로 서버를 가동합니다.
