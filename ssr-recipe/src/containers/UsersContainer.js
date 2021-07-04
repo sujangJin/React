@@ -8,7 +8,7 @@ const UsersContainer = ({ users, getUsers}) => {
     useEffect(() => {
         if (users) return;
         getUsers();
-    }, [getusers, users]);
+    }, [getUsers, users]);
     return <Users users={users} />;
 };
 
