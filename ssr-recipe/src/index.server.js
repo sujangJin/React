@@ -18,8 +18,8 @@ const manifest = JSON.parse(
 );
 
 const chunks = Object.keys(manifest.files)
-    .filter(key => /chunk\.js$/.exec(key)) // chunk.js로 끝나는 키를 찾아서
-    .map(key => `<script src="${manifest[key]}"></script>`) // 스크립트 태그로 변환하고
+    .filter((key) => /chunk\.js$/.exec(key)) // chunk.js로 끝나는 키를 찾아서
+    .map((key) => `<script src="${manifest.files[key]}"></script>`) // 스크립트 태그로 변환하고
     .join(''); // 합침
 
 function createPage(root, stateScript) {
@@ -34,7 +34,7 @@ function createPage(root, stateScript) {
         />
         <meta name="theme-color" content="#000000" />
         <title>React App</title>
-        <link href="${manifest['main.css']}" rel="stylesheet" />
+        <link href="${manifest.files['main.css']}" rel="stylesheet" />
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -53,7 +53,7 @@ function createPage(root, stateScript) {
 const app = express();
 
 // 서버 사이드 렌더링을 처리할 핸들러 함수입니다.
-const serverRender = (req, res, next) => {
+const serverRender = async (req, res, next) => {
     // 이 함수는 4040가 더야 하는 상황에 404를 띄우지 않고 서버 사이드 렌더링을 해 줍니다.
 
     const context = {};
